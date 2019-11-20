@@ -26,24 +26,39 @@ const CHARACTERS_API_ENDPOINT = "https://www.anapioficeandfire.com/api/character
 export default {
   name: "SearchBarInput",
   data: () => ({
-    searchInput: ""
+    searchInput: "",
   }),
   methods: {
     /**
      * When the user submits their search request (hits enter) query the API endpoint
      */
     submitSearch() {
+      /**
+       *Lets app.vue know that the function 'serach-submitted'
+       * is being needed
+       */
       this.$emit('search-submitted');
 
       axios
         .get(CHARACTERS_API_ENDPOINT, {
           params: {
-            // EXERCISE - Implement query GET parameters to search by name. Watch for case sensitivity.
+         /**
+          * Search for the specific input name on the data.
+          * If nothing is typed it return the whole data 
+          * If a incorrect name is typed it does not return any data
+          * - This need to return data when the user types an incorrect name.
+          */
+          name:this.searchInput // EXERCISE - Implement query GET parameters to search by name. Watch for case sensitivity.
           },
         })
         .then(response => {
+
           // EXERCISE - Use the Vue.js bus (see eg: line 36 above) to emit a search-responded event with the results.
-          console.log(response); // eslint-disable-line no-console
+          /**
+           *Lets app.vue know that the function 'serach-responded'
+           * is being needed
+           */
+          this.$emit('search-responded', response);
         });
     }
   }

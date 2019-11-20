@@ -46,9 +46,13 @@ export default {
      */
     searchResponded(response) {
       this.isLoading = false;
-
-      // EXERCISE - Implement logic to handle the API response.
-      console.log(response); // eslint-disable-line no-console
+      /**
+       * Place the response data to a variable results to 
+       * retrive the needed information easier
+       */
+      this.results = response.data// EXERCISE - Implement logic to handle the API 
+      
+      
     }
   }
 };
